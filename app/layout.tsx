@@ -6,6 +6,9 @@ import { Analytics } from './components/analytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// 定义 GA ID
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'
+
 export const metadata: Metadata = {
   title: 'Free office files to markdown converter',
   description: 'Convert Office files to Markdown format easily in your browser. Support for Word, Excel, PowerPoint, PDF, and more.',
@@ -47,10 +50,11 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'YOUR_GOOGLE_SITE_VERIFICATION_CODE',
-    yandex: 'YOUR_YANDEX_VERIFICATION_CODE',
-    yahoo: 'YOUR_YAHOO_VERIFICATION_CODE',
-    bing: 'YOUR_BING_VERIFICATION_CODE',
-    googleAnalytics: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX',
+    other: {
+      'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE', // Bing 验证码
+      'yandex-verification': 'YOUR_YANDEX_VERIFICATION_CODE', // Yandex 验证码（如果需要）
+      'y_key': 'YOUR_YAHOO_VERIFICATION_CODE', // Yahoo 验证码（如果需要）
+    }
   },
   icons: {
     icon: [
@@ -126,9 +130,8 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Analytics measurementId={metadata.verification.googleAnalytics as string} />
+        <Analytics measurementId={googleAnalyticsId} />
       </body>
     </html>
   )
 }
-
