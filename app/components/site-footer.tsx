@@ -6,8 +6,8 @@ export function SiteFooter() {
           © 2024. Web is Awesome, Web is Best.
         </div>
         <div className="flex space-x-4">
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900">Twitter</a>
-          <a href="#" className="text-sm text-gray-600 hover:text-gray-900">GitHub</a>
+          <a href="https://x.com/lizhaoshui" className="text-sm text-gray-600 hover:text-gray-900">Twitter</a>
+          <a href="https://github.com/budaobu/office2markdown" className="text-sm text-gray-600 hover:text-gray-900">GitHub</a>
         </div>
       </div>
     </footer>

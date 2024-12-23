@@ -7,7 +7,7 @@ import { Analytics } from './components/analytics'
 const inter = Inter({ subsets: ['latin'] })
 
 // 定义 GA ID
-const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'
+const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-1YPLDXL622'
 
 export const metadata: Metadata = {
   title: 'Free office files to markdown converter',
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     description: 'Convert Office files to Markdown format easily in your browser',
     url: 'https://markitdown.dakaiai.app',
     siteName: 'Office to Markdown Converter',
-    images: [
+    /* images: [
       {
         url: 'https://markitdown.dakaiai.app/og-image.jpg',
         width: 1200,
         height: 630,
       },
-    ],
+    ], */
     locale: 'en_US',
     type: 'website',
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: 'Free office files to markdown converter',
     description: 'Convert Office files to Markdown format easily in your browser',
     creator: '@lizhaoshui',
-    images: ['https://markitdown.dakaiai.app/twitter-image.jpg'],
+    // images: ['https://markitdown.dakaiai.app/twitter-image.jpg'],
   },
   robots: {
     index: true,
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'YOUR_GOOGLE_SITE_VERIFICATION_CODE',
-    other: {
+    google: 'sGlqgAPbK-u7Wa1yVSCJO-bMoN7irMVCkUsJTtX3B4k',
+    /* other: {
       'msvalidate.01': 'YOUR_BING_VERIFICATION_CODE', // Bing 验证码
       'yandex-verification': 'YOUR_YANDEX_VERIFICATION_CODE', // Yandex 验证码（如果需要）
       'y_key': 'YOUR_YAHOO_VERIFICATION_CODE', // Yahoo 验证码（如果需要）
-    }
+    } */
   },
   icons: {
     icon: [
