@@ -29,13 +29,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: `
-              default-src 'self' https://testingcf.jsdelivr.net;
-              script-src 'self' 'unsafe-eval' 'unsafe-inline' https://testingcf.jsdelivr.net https://www.googletagmanager.com https://static.cloudflareinsights.com;
-              connect-src 'self' https://testingcf.jsdelivr.net;
-              img-src 'self' data:;
-              style-src 'self' 'unsafe-inline';
-            `,
+            value: "default-src 'self' https://testingcf.jsdelivr.net; script-src 'self' 'unsafe-eval' https://testingcf.jsdelivr.net https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://testingcf.jsdelivr.net; img-src 'self' data:; style-src 'self' 'unsafe-inline'",
           },
         ],
       },
