@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       'y_key': 'YOUR_YAHOO_VERIFICATION_CODE', // Yahoo 验证码（如果需要）
     } */
   },
-  icons: {
+  /* icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: 'Office to Markdown Converter',
   },
   applicationName: 'Office to Markdown Converter',
-  /* msapplication: {
+  msapplication: {
     tileColor: '#ffffff',
     tileImage: '/ms-icon-144x144.png',
   }, */
@@ -116,10 +116,10 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/manifest.json" />
+        {/* <link rel="manifest" href="/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff" /> */}
       </head>
       <body className={inter.className}>
         <ThemeProvider
