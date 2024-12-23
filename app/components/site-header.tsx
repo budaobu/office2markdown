@@ -8,11 +8,11 @@ export function SiteHeader() {
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <img src="/site-logo.webp" alt="Logo" className="h-6 w-6" />
-          <span className="font-semibold">Site name</span>
+          <span className="font-semibold">MarkitDown</span>
         </div>
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="sm" className="hidden sm:flex" asChild>
-            <a href="https://www.buymeacoffee.com/example" target="_blank" rel="noopener noreferrer">
+            <a href="https://buymeacoffee.com/lizhaoshui" target="_blank" rel="noopener noreferrer">
               <Coffee className="mr-2 h-4 w-4" />
               Buy me a coffee
             </a>

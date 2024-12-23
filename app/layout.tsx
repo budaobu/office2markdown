@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   title: 'Free office files to markdown converter',
   description: 'Convert Office files to Markdown format easily in your browser. Support for Word, Excel, PowerPoint, PDF, and more.',
   keywords: ['office', 'markdown', 'converter', 'docx', 'xlsx', 'pptx', 'pdf', 'online tool'],
-  authors: [{ name: 'Joey Hu', url: 'https://yourwebsite.com' }],
-  metadataBase: new URL('https://your-website-url.com'),
+  authors: [{ name: 'Joey Hu', url: 'https://markitdown.dakaiai.app' }],
+  metadataBase: new URL('https://markitdown.dakaiai.app'),
   openGraph: {
     title: 'Free office files to markdown converter',
     description: 'Convert Office files to Markdown format easily in your browser',
-    url: 'https://your-website-url.com',
+    url: 'https://markitdown.dakaiai.app',
     siteName: 'Office to Markdown Converter',
     images: [
       {
-        url: 'https://your-website-url.com/og-image.jpg',
+        url: 'https://markitdown.dakaiai.app/og-image.jpg',
         width: 1200,
         height: 630,
       },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: 'Free office files to markdown converter',
     description: 'Convert Office files to Markdown format easily in your browser',
     creator: '@lizhaoshui',
-    images: ['https://your-website-url.com/twitter-image.jpg'],
+    images: ['https://markitdown.dakaiai.app/twitter-image.jpg'],
   },
   robots: {
     index: true,
