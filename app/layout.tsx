@@ -89,10 +89,10 @@ export const metadata: Metadata = {
     title: 'Office to Markdown Converter',
   },
   applicationName: 'Office to Markdown Converter',
-  msapplication: {
+  /* msapplication: {
     tileColor: '#ffffff',
     tileImage: '/ms-icon-144x144.png',
-  },
+  }, */
 }
 
 export default function RootLayout({
