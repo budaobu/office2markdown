@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './components/theme-provider'
-import { Analytics } from './components/analytics'
+// import { Analytics } from './components/analytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
 // 定义 GA ID
-const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-1YPLDXL622'
+// const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-1YPLDXL622'
 
 export const metadata: Metadata = {
   title: 'Free office files to markdown converter',
@@ -130,7 +130,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Analytics measurementId={googleAnalyticsId} />
+        {/* <Analytics measurementId={googleAnalyticsId} /> */}
       </body>
     </html>
   )
