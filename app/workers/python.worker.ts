@@ -1,4 +1,13 @@
-// eslint-disable-next-line no-undef
+/// <reference lib="webworker" />
+
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    loadPyodide: any
+    pyodide: any
+  }
+}
+
 importScripts('https://testingcf.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js')
 
 async function loadPyodideAndPackages() {
@@ -26,12 +35,12 @@ async function loadPyodideAndPackages() {
 
 let pyodideReadyPromise = loadPyodideAndPackages()
 
-globalThis.onmessage = async (event) => {
+self.onmessage = async (event) => {
   try {
     await pyodideReadyPromise
   } catch (err) {
     console.error('Failed to initialize Pyodide:', err)
-    globalThis.postMessage({ 
+    self.postMessage({ 
       error: `Failed to initialize Pyodide: ${err instanceof Error ? err.message : String(err)}` 
     })
     return
@@ -67,17 +76,19 @@ except Exception as e:
 
     const content = globalThis.pyodide.FS.readFile(`/${file.filename}.md`, { encoding: 'utf8' })
     console.log('Markdown file read, length:', content.length)
-    globalThis.postMessage({
+    self.postMessage({
       filename: `${file.filename}.md`,
       content: content,
       time: Date.now() - startTime,
     })
   } catch (error) {
     console.error('Error in worker:', error)
-    globalThis.postMessage({ 
+    self.postMessage({ 
       error: error instanceof Error ? error.message : 'Unknown error during conversion',
       filename: file.filename 
     })
   }
 }
 
+// 防止 TypeScript 将此文件视为普通模块
+export {}
