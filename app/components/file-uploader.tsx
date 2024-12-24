@@ -28,6 +28,7 @@ export function FileUploader({ onFileUpload }: FileUploaderProps) {
       console.log('File loaded as ArrayBuffer, size:', arrayBuffer.byteLength);
       const markdown = await convertToMarkdown(arrayBuffer, file.name, (progressMessage: string) => {
         setProgress(progressMessage);
+        console.log('Progress:', progressMessage);
       });
       console.log('Conversion completed, markdown length:', markdown.length);
       onFileUpload(markdown);
@@ -101,7 +102,7 @@ export function FileUploader({ onFileUpload }: FileUploaderProps) {
       </div>
       {error && (
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md text-red-600">
-          {error}
+          Error: {error}
         </div>
       )}
       {isConverting && (

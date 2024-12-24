@@ -46,10 +46,10 @@ const TIMEOUT_DURATION = 180000; // 3 minutes
 let lastProgressUpdate = 0;
 const PROGRESS_UPDATE_INTERVAL = 5000; // 5 seconds
 
-const updateProgress = () => {
+const updateProgress = (message: string) => {
   const now = Date.now();
   if (now - lastProgressUpdate > PROGRESS_UPDATE_INTERVAL) {
-    self.postMessage({ type: 'progress', message: 'Still converting...' });
+    self.postMessage({ type: 'progress', message });
     lastProgressUpdate = now;
   }
 };
@@ -80,13 +80,19 @@ globalThis.onmessage = async (event) => {
       globalThis.pyodide.FS.writeFile(`/${file.filename}`, new Uint8Array(file.buffer));
       console.log('File written to Pyodide filesystem');
 
+      updateProgress('Starting conversion...');
+
       const result = await globalThis.pyodide.runPythonAsync(`
         import sys
+        import traceback
         try:
           from markitdown import MarkItDown
           
+          def progress_callback(progress):
+              js.self.postMessage({"type": "progress", "message": f"Converting... {progress:.0%}"})
+          
           markitdown = MarkItDown()
-          result = markitdown.convert("/${file.filename}", progress_callback=lambda x: js.self.postMessage({"type": "progress", "message": f"Converting... {x:.0%}"}))
+          result = markitdown.convert("/${file.filename}", progress_callback=progress_callback)
           print("Conversion completed")
           
           with open("/${file.filename}.md", "w") as file:
@@ -94,11 +100,15 @@ globalThis.onmessage = async (event) => {
           
           print("Markdown file written")
           print(f"Markdown content length: {len(result.text_content)}")
+          result.text_content
         except Exception as e:
           print(f"Error during conversion: {str(e)}", file=sys.stderr)
+          print(traceback.format_exc(), file=sys.stderr)
           raise e
       `);
       console.log('Python code executed successfully');
+
+      updateProgress('Reading converted file...');
 
       const content = globalThis.pyodide.FS.readFile(`/${file.filename}.md`, { encoding: 'utf8' });
       console.log('Markdown file read, length:', content.length);
