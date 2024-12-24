@@ -13,27 +13,32 @@ export function FileUploader({ onFileUpload }: FileUploaderProps) {
   const { isLoading, error: pyodideError, convertToMarkdown } = usePyodide()
   const [isConverting, setIsConverting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [progress, setProgress] = useState<string | null>(null);
 
   const processFile = useCallback(async (file: File) => {
-    setIsConverting(true)
-    setError(null)
+    setIsConverting(true);
+    setError(null);
+    setProgress(null);
     try {
       if (!file) {
-        throw new Error('No file selected')
+        throw new Error('No file selected');
       }
-      console.log('Processing file:', file.name)
-      const arrayBuffer = await file.arrayBuffer()
-      console.log('File loaded as ArrayBuffer, size:', arrayBuffer.byteLength)
-      const markdown = await convertToMarkdown(arrayBuffer, file.name)
-      console.log('Conversion completed, markdown length:', markdown.length)
-      onFileUpload(markdown)
+      console.log('Processing file:', file.name);
+      const arrayBuffer = await file.arrayBuffer();
+      console.log('File loaded as ArrayBuffer, size:', arrayBuffer.byteLength);
+      const markdown = await convertToMarkdown(arrayBuffer, file.name, (progressMessage: string) => {
+        setProgress(progressMessage);
+      });
+      console.log('Conversion completed, markdown length:', markdown.length);
+      onFileUpload(markdown);
     } catch (err) {
-      console.error('Error processing file:', err)
-      setError(err instanceof Error ? err.message : 'An unknown error occurred while processing the file')
+      console.error('Error processing file:', err);
+      setError(err instanceof Error ? err.message : 'An unknown error occurred while processing the file');
     } finally {
-      setIsConverting(false)
+      setIsConverting(false);
+      setProgress(null);
     }
-  }, [convertToMarkdown, onFileUpload])
+  }, [convertToMarkdown, onFileUpload]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
@@ -97,6 +102,11 @@ export function FileUploader({ onFileUpload }: FileUploaderProps) {
       {error && (
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md text-red-600">
           {error}
+        </div>
+      )}
+      {isConverting && (
+        <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md text-blue-600">
+          {progress || 'Converting...'}
         </div>
       )}
       <div className="mt-4 text-center">

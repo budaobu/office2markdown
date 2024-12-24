@@ -35,25 +35,29 @@ export function usePyodide() {
     }
   }, []);
 
-  const convertToMarkdown = useCallback(async (fileContent: ArrayBuffer, fileName: string): Promise<string> => {
+  const convertToMarkdown = useCallback(async (fileContent: ArrayBuffer, fileName: string, onProgress: (message: string) => void): Promise<string> => {
     if (!worker) {
       throw new Error("Worker is not initialized");
     }
 
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
-        reject(new Error('Conversion timed out after 60 seconds'));
-      }, 60000);
+        reject(new Error('Conversion timed out after 3 minutes'));
+      }, 180000);
 
       worker.onmessage = (event) => {
-        clearTimeout(timeoutId);
-        const data = event.data as ConversionResult | { error: string };
-        if ('error' in data) {
-          console.error('Conversion error:', data.error);
-          reject(new Error(data.error));
+        const data = event.data;
+        if (data.type === 'progress') {
+          onProgress(data.message);
         } else {
-          console.log('Conversion successful, content length:', data.content.length);
-          resolve(data.content);
+          clearTimeout(timeoutId);
+          if ('error' in data) {
+            console.error('Conversion error:', data.error);
+            reject(new Error(data.error));
+          } else {
+            console.log('Conversion successful, content length:', data.content.length);
+            resolve(data.content);
+          }
         }
       };
 
